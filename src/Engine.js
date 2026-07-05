@@ -14,10 +14,18 @@ export class Engine {
 
     this.world = new World();
 
-    const circle = new Circle(200, 100, 30);
-    circle.velocity.x = 100;
+    const circleA = new Circle(200, 100, 30);
+    circleA.velocity.x = 100;
 
-    this.world.addBody(circle);
+    const circleB = new Circle(350, 50, 20);
+    circleB.velocity.x = -50;
+
+    const circleC = new Circle(500, 150, 40);
+    circleC.velocity.x = 25;
+
+    this.world.addBody(circleA);
+    this.world.addBody(circleB);
+    this.world.addBody(circleC);
   }
 
   resize() {
@@ -43,7 +51,10 @@ export class Engine {
   }
 
   update(deltaTime) {
-    this.world.update(deltaTime);
+    this.world.step(deltaTime, {
+      width: this.canvas.width,
+      height: this.canvas.height,
+    });
   }
 
   render() {

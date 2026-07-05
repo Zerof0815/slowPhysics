@@ -7,19 +7,22 @@ export class Body {
     this.acceleration = new Vector2();
     this.force = new Vector2();
     this.mass = 1;
+    this.restitution = 0.7;
   }
 
   applyForce(force) {
     this.force.add(force);
   }
 
-  update(deltaTime) {
+  integrate(deltaTime) {
     this.acceleration.add(this.force.clone().multiply(1 / this.mass));
 
     this.velocity.add(this.acceleration.clone().multiply(deltaTime));
 
     this.position.add(this.velocity.clone().multiply(deltaTime));
+  }
 
+  clearForces() {
     this.force.x = 0;
     this.force.y = 0;
 
